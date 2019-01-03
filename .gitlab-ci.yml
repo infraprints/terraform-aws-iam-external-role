@@ -7,9 +7,9 @@ image:
 variables:
   TFLINT_VERSION: v0.7.2
 
-cache:
-  paths:
-    - .terraform
+# cache:
+#   paths:
+#     - .terraform
 
 stages:
   - "Validate"
@@ -31,18 +31,3 @@ analysis:
   script:
     - curl -L -o /tmp/tflint.zip https://github.com/wata727/tflint/releases/download/${TFLINT_VERSION}/tflint_linux_amd64.zip && unzip /tmp/tflint.zip -d /usr/local/bin
     - tflint
-
-testing:
-  stage: "Test"
-  script:
-    - echo "Nothing to do"
-
-package:
-  stage: "Package"
-  script:
-    - sh build/package.sh
-
-deploy:
-  stage: "Deploy"
-  script:
-    - echo "Nothing to do"
