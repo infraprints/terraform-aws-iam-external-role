@@ -17,6 +17,19 @@ data "aws_iam_policy_document" "external" {
   }
 }
 
+data "aws_iam_policy_document" "aws" {
+  statement {
+    sid     = "AllowExternalAccess"
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${var.external_role_arn}"]
+    }
+  }
+}
+
 # data "aws_arn" "external_role_arns" {
 #   count = "${length(var.external_role_arn)}"
 #   arn   = "${element(var.external_role_arn, count.index)}"
@@ -34,7 +47,8 @@ locals {
 
 resource "aws_iam_role" "external" {
   name               = "${var.name}"
-  assume_role_policy = "${data.aws_iam_policy_document.external.json}"
+  assume_role_policy = "${var.external_id != "" ? data.aws_iam_policy_document.external.json : data.aws_iam_policy_document.aws.json}"
+  #assume_role_policy = "${data.aws_iam_policy_document.external.json}"
 
   tags = "${merge(var.tags, local.tags)}"
 }

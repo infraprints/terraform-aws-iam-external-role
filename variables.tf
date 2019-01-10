@@ -42,6 +42,7 @@ variable "tags" {
 variable "external_id" {
   type        = "string"
   description = "External Identifier set on the role."
+  default     = ""
 }
 
 variable "external_role_arn" {
