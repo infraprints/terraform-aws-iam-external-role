@@ -26,7 +26,6 @@ module "example" {
   source = "../../"
 
   name              = "acme-assume-role-${random_string.name.result}"
-  external_id       = "${random_string.external_id.result}"
   external_role_arn = ["${aws_iam_role.default.arn}"]
 }
 
