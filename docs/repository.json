@@ -1,8 +1,11 @@
 {
-  "name": "[PLACEHOLDER]",
-  "tagline": "[PLACEHOLDER]",
+  "name": "AWS IAM External Role Terraform module",
+  "slug": "terraform-aws-iam-external-role",
+  "namespace": "aws",
+  "project": "infraprints",
+  "description": "Terraform module responsible for an IAM role with external AWS access.",
   "license": {
-    "name": "[PLACEHOLDER]"
+    "name": "MIT"
   },
-  "tags": ["[PLACEHOLDER]"]
+  "tags": ["terraform", "terraform-module", "aws", "aws-iam"]
 }
