@@ -1,0 +1,14 @@
+---
+name: AWS IAM Role for Cross Account
+slug: iam-external-role
+project: infraprints
+namespace: [terraform, aws]
+description: Describes an IAM role for delegating cross-account access.
+license:
+  name: MIT
+tags:
+  - terraform
+  - terraform-module
+  - aws
+  - aws-iam
+  - cross-account
