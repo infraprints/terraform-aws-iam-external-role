@@ -7,7 +7,7 @@ description: Terraform module responsible for an IAM role with external AWS acce
 license:
   name: MIT
 tags:
-  - infrastructure
+  - terraform
+  - terraform-module
   - aws
-  - aws-iam
-  - cross-account
+  - 
