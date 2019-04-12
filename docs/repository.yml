@@ -1,5 +1,5 @@
 ---
-name: AWS IAM External Role Terraform module
+name: AWS IAM Role for Cross Account
 slug: iam-external-role
 project: infraprints
 namespace: [terraform, aws]
