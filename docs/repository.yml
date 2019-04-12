@@ -1,0 +1,13 @@
+---
+name: AWS IAM External Role Terraform module
+slug: iam-external-role
+project: infraprints
+namespace: [terraform, aws]
+description: Terraform module responsible for an IAM role with external AWS access.
+license:
+  name: MIT
+tags:
+  - infrastructure
+  - aws
+  - aws-iam
+  - cross-account
