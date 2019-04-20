@@ -1,5 +1,5 @@
 resource "aws_iam_role" "default" {
-  name = "infraprints-iam-external-role-assume-role"
+  name = "infraprints-iam-external-role-basic-assume"
 
   assume_role_policy = <<EOF
 {

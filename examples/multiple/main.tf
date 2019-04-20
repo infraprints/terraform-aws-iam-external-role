@@ -1,15 +1,11 @@
 locals {
+  ## WORKAROUND: Specify count instead of length(local.externals)
   roles = 5
-}
-
-resource "random_id" "unique" {
-  count       = "${local.roles}"
-  byte_length = 8
 }
 
 resource "aws_iam_role" "default" {
   count = "${local.roles}"
-  name  = "acme-external-role-${count.index}-${element(random_id.unique.*.hex, count.index)}"
+  name  = "infraprints-iam-external-role-multiple-assume-${count.index}"
 
   assume_role_policy = <<EOF
 {
@@ -28,17 +24,17 @@ resource "aws_iam_role" "default" {
 EOF
 }
 
+locals {
+  externals = ["${aws_iam_role.default.*.arn}"]
+}
+
 module "example" {
   source = "../../"
 
-  name              = "acme-assume-role-${random_string.name.result}"
-  external_id       = "${random_string.external_id.result}"
-  external_role_arn = ["${aws_iam_role.default.*.arn}"]
-}
-
-resource "random_string" "name" {
-  length  = 16
-  special = false
+  name        = "infraprints-iam-external-role-multiple"
+  external_id = "${random_string.external_id.result}"
+  role_arn    = "${local.externals}"
+  count       = "${local.roles}"
 }
 
 resource "random_string" "external_id" {
