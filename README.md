@@ -42,12 +42,12 @@ EOF
 ## Examples
 
 - [Basic Example](examples/basic)
-- [Adjusted Example](examples/adjusted)
+- [ExternalID Example](examples/external)
+- [Multiple roles Example](examples/multiple)
 
 ## Notes
 
-- With the default configuration, all objects in the S3 bucket will **expire** in 90 days.
-- The S3 bucket uses tiered storage with eventual expiration. This bucket is not designed for long term persistence.
+- The `count` property is required as a constant as a workaround to a Terraform issue.
 
 ## Inputs
 
