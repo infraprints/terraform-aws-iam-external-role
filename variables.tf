@@ -1,24 +1,24 @@
 variable "name" {
   type        = "string"
-  description = "The name of the role. If omitted, Terraform will assign a random, unique name."
-}
-
-variable "force_detach_policies" {
-  type        = "string"
-  description = "Specifies to force detaching any policies the role has before destroying it. Defaults to false."
-  default     = false
-}
-
-variable "path" {
-  type        = "string"
-  description = "The path to the role. See IAM Identifiers for more information."
-  default     = "/"
+  description = "The name of the role."
 }
 
 variable "description" {
   type        = "string"
   description = "The description of the role."
   default     = ""
+}
+
+variable "path" {
+  type        = "string"
+  description = "The path to the role. See [IAM Identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) for more information."
+  default     = "/external/"
+}
+
+variable "force_detach_policies" {
+  type        = "string"
+  description = "Specifies to force detaching any policies the role has before destroying it. Defaults to false."
+  default     = true
 }
 
 variable "max_session_duration" {
@@ -45,7 +45,12 @@ variable "external_id" {
   default     = ""
 }
 
-variable "external_role_arn" {
+variable "role_arn" {
   type        = "list"
   description = "The list of principal entities that is allowed to assume the role."
+}
+
+variable "count" {
+  type        = "string"
+  description = "The number of principal entities."
 }

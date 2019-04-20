@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "external" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${var.external_role_arn}"]
+      identifiers = ["${var.role_arn}"]
     }
 
     condition {
@@ -25,31 +25,33 @@ data "aws_iam_policy_document" "aws" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${var.external_role_arn}"]
+      identifiers = ["${var.role_arn}"]
     }
   }
 }
 
-# data "aws_arn" "external_role_arns" {
-#   count = "${length(var.external_role_arn)}"
-#   arn   = "${element(var.external_role_arn, count.index)}"
-# }
+data "aws_arn" "external_role_arns" {
+  count = "${var.count}"
+  arn   = "${element(var.role_arn, count.index)}"
+}
 
 locals {
-  #account_ids = "${distinct(data.aws_arn.external_role_arns.*.account)}"
+  account_ids = "${distinct(data.aws_arn.external_role_arns.*.account)}"
 
   tags = {
-    IsExternal = true
-
-    #ExternalIDs = "${join(",", local.account_ids)}"
+    IsExternal   = true
+    AwsAccountID = "${join(",", local.account_ids)}"
+    ExternalID   = "${var.external_id}"
   }
 }
 
 resource "aws_iam_role" "external" {
-  name               = "${var.name}"
-  assume_role_policy = "${var.external_id != "" ? data.aws_iam_policy_document.external.json : data.aws_iam_policy_document.aws.json}"
-
-  #assume_role_policy = "${data.aws_iam_policy_document.external.json}"
-
-  tags = "${merge(var.tags, local.tags)}"
+  name                  = "${var.name}"
+  description           = "${var.description}"
+  assume_role_policy    = "${var.external_id != "" ? data.aws_iam_policy_document.external.json : data.aws_iam_policy_document.aws.json}"
+  path                  = "${var.path}"
+  max_session_duration  = "${var.max_session_duration}"
+  permissions_boundary  = "${var.permissions_boundary}"
+  force_detach_policies = "${var.force_detach_policies}"
+  tags                  = "${merge(var.tags, local.tags)}"
 }
