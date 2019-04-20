@@ -31,7 +31,6 @@ resource "aws_iam_role" "default" {
         "Service": "ec2.amazonaws.com"
       },
       "Effect": "Allow",
-      "Sid": ""
     }
   ]
 }
