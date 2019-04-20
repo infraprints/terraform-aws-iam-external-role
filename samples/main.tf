@@ -1,3 +1,12 @@
+module "example" {
+  source = "git::https://gitlab.com/infraprints/modules/aws/iam-external-role"
+
+  name        = "infraprints-iam-external-role"
+  external_id = "TXAiS9rfgQghzWW2"
+  role_arn    = ["${aws_iam_role.default.arn}"]
+  count       = "1"
+}
+
 resource "aws_iam_role" "default" {
   name = "infraprints-ec2-role"
 
@@ -16,13 +25,4 @@ resource "aws_iam_role" "default" {
   ]
 }
 EOF
-}
-
-module "example" {
-  source = "git::https://gitlab.com/infraprints/modules/aws/iam-external-role"
-
-  name        = "infraprints-iam-external-role"
-  external_id = "TXAiS9rfgQghzWW2"
-  role_arn    = ["${aws_iam_role.default.arn}"]
-  count       = "1"
 }
