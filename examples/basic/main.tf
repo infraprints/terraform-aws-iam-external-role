@@ -1,5 +1,6 @@
 resource "aws_iam_role" "default" {
-  name = "infraprints-iam-external-role-basic-assume"
+  name        = "external-service-role"
+  description = "A role in an external account."
 
   assume_role_policy = <<EOF
 {
@@ -21,14 +22,14 @@ EOF
 locals {
   externals = ["${aws_iam_role.default.arn}"]
 
-  ## WORKAROUND: Specify count instead of length(local.externals)
   count = "1"
 }
 
 module "example" {
   source = "../../"
 
-  name     = "infraprints-iam-external-role-basic"
-  role_arn = "${local.externals}"
-  count    = "${local.count}"
+  name        = "externally-accessible-role"
+  description = "The entrypoint to the AWS account from the external service account."
+  role_arn    = "${local.externals}"
+  count       = "${local.count}"
 }
