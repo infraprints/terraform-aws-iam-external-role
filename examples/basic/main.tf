@@ -20,8 +20,7 @@ EOF
 
 locals {
   externals = ["${aws_iam_role.default.arn}"]
-
-  count = "1"
+  count     = "1"
 }
 
 module "example" {

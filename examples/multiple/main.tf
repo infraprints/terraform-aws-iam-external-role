@@ -1,11 +1,10 @@
 locals {
-  ## WORKAROUND: Specify count instead of length(local.externals)
   roles = 5
 }
 
 resource "aws_iam_role" "default" {
   count = "${local.roles}"
-  name  = "infraprints-iam-external-role-multiple-assume-${count.index}"
+  name  = "external-service-role-${count.index}"
 
   assume_role_policy = <<EOF
 {
@@ -31,7 +30,7 @@ locals {
 module "example" {
   source = "../../"
 
-  name        = "infraprints-iam-external-role-multiple"
+  name        = "externally-accessible-role"
   external_id = "${random_string.external_id.result}"
   role_arn    = "${local.externals}"
   count       = "${local.roles}"
