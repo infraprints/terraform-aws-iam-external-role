@@ -1,6 +1,5 @@
 resource "aws_iam_role" "default" {
-  name        = "external-service-role"
-  description = "A role in an external account."
+  name = "external-service-role"
 
   assume_role_policy = <<EOF
 {
@@ -28,8 +27,7 @@ locals {
 module "example" {
   source = "../../"
 
-  name        = "externally-accessible-role"
-  description = "The entrypoint to the AWS account from the external service account."
-  role_arn    = "${local.externals}"
-  count       = "${local.count}"
+  name     = "externally-accessible-role"
+  role_arn = "${local.externals}"
+  count    = "${local.count}"
 }
