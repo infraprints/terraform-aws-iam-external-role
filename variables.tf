@@ -49,9 +49,3 @@ variable "role_arn" {
   type        = list(string)
   description = "The list of principal entities that is allowed to assume the role."
 }
-
-variable "count" {
-  type        = string
-  description = "The number of principal entities."
-}
-

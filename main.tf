@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "aws" {
 }
 
 data "aws_arn" "external_role_arns" {
-  count = var.count
+  count = length(var.role_arn)
   arn   = element(var.role_arn, count.index)
 }
 
