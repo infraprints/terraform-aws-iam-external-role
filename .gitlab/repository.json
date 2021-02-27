@@ -1,5 +1,5 @@
 {
   "name": "terraform-aws-iam-external-role",
-  "url": "https://gitlab.com/infraprints/terraform-aws-iam-external-role",
+  "url": "https://gitlab.com/infraprints/modules/terraform-aws-iam-external-role",
   "status": "mirror"
 }
